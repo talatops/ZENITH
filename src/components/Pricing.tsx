@@ -54,21 +54,21 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <section id="pricing" className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[400px] bg-hero-gradient opacity-10 blur-3xl"></div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Find A Plan To <span className="gradient-text">Power Your Tasks</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Service Options From Free To Paid According To Your Needs
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}

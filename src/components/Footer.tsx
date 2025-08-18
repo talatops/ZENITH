@@ -42,17 +42,17 @@ const Footer = () => {
 
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand section */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="lg:col-span-1 text-center sm:text-left">
+            <div className="flex items-center gap-2 mb-4 justify-center sm:justify-start">
               <div className="w-8 h-8 bg-hero-gradient rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold gradient-text">ZENITH</span>
             </div>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-6 text-sm sm:text-base">
               The ultimate productivity tool for achievers who want to get things done.
             </p>
             <div className="flex items-center gap-4">

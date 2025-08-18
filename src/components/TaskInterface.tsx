@@ -3,27 +3,27 @@ import { Plus, Calendar } from "lucide-react";
 
 const TaskInterface = () => {
   return (
-    <section className="py-24 bg-card-gradient relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-card-gradient relative overflow-hidden">
       <div className="absolute inset-0 bg-glow-gradient opacity-30"></div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left content */}
-          <div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <div className="text-center lg:text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               Add Tasks With Ease Using
               <br />
               <span className="gradient-text">ZENITH's Intuitive Interface</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
               Quickly And Effortlessly Create Tasks To Stay Organized And On Track With Your Goals
             </p>
-            <div className="flex gap-4">
-              <Button variant="hero" size="lg">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              <Button variant="hero" size="lg" className="w-full sm:w-auto">
                 Add New Task
                 <Plus className="w-5 h-5" />
               </Button>
-              <Button variant="hero-outline" size="lg">
+              <Button variant="hero-outline" size="lg" className="w-full sm:w-auto">
                 Start Calendar
                 <Calendar className="w-5 h-5" />
               </Button>
@@ -33,68 +33,69 @@ const TaskInterface = () => {
           {/* Right content - Full Web Dashboard */}
           <div className="relative">
             {/* 3D Spline integration point for web dashboard */}
-            <div className="bg-background rounded-3xl p-8 border border-primary/20 relative overflow-hidden">
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-hero-gradient rounded-full pulse-glow"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full pulse-glow"></div>
+            <div className="bg-background rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-primary/20 relative overflow-hidden">
+              <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-6 sm:w-8 h-6 sm:h-8 bg-hero-gradient rounded-full pulse-glow"></div>
+              <div className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-4 sm:w-6 h-4 sm:h-6 bg-accent rounded-full pulse-glow"></div>
               
               {/* Dashboard header */}
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h3 className="text-2xl font-bold gradient-text mb-2">ZENITH Dashboard</h3>
-                  <p className="text-muted-foreground">Manage your productivity workspace</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
+                <div className="mb-4 sm:mb-0">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text mb-1 sm:mb-2">ZENITH Dashboard</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">Manage your productivity workspace</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-hero-gradient rounded-full flex items-center justify-center pulse-glow">
-                    <span className="text-white text-sm font-bold">JD</span>
+                <div className="flex items-center gap-3 justify-center sm:justify-start">
+                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-hero-gradient rounded-full flex items-center justify-center pulse-glow">
+                    <span className="text-white text-xs sm:text-sm font-bold">JD</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick actions and stats row */}
-              <div className="grid grid-cols-4 gap-4 mb-8">
-                <div className="card-glow p-4 text-center">
-                  <div className="text-2xl font-bold gradient-text">24</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6 sm:mb-8">
+                <div className="card-glow p-2 sm:p-3 lg:p-4 text-center">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text">24</div>
                   <div className="text-xs text-muted-foreground">Total Tasks</div>
                 </div>
-                <div className="card-glow p-4 text-center">
-                  <div className="text-2xl font-bold text-secondary">16</div>
+                <div className="card-glow p-2 sm:p-3 lg:p-4 text-center">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-secondary">16</div>
                   <div className="text-xs text-muted-foreground">Completed</div>
                 </div>
-                <div className="card-glow p-4 text-center">
-                  <div className="text-2xl font-bold text-accent">8</div>
+                <div className="card-glow p-2 sm:p-3 lg:p-4 text-center">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-accent">8</div>
                   <div className="text-xs text-muted-foreground">In Progress</div>
                 </div>
-                <div className="card-glow p-4 text-center">
-                  <div className="text-2xl font-bold text-destructive">2</div>
+                <div className="card-glow p-2 sm:p-3 lg:p-4 text-center">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-destructive">2</div>
                   <div className="text-xs text-muted-foreground">Overdue</div>
                 </div>
               </div>
 
               {/* Task creation and filters */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <div className="card-glow flex-1">
-                  <div className="flex items-center gap-3 p-4">
-                    <div className="w-4 h-4 border-2 border-primary rounded"></div>
+                  <div className="flex items-center gap-3 p-3 sm:p-4">
+                    <div className="w-3 sm:w-4 h-3 sm:h-4 border-2 border-primary rounded"></div>
                     <input 
                       type="text" 
                       placeholder="Add a new task..."
-                      className="flex-1 bg-transparent border-none outline-none text-sm"
+                      className="flex-1 bg-transparent border-none outline-none text-xs sm:text-sm"
                       readOnly
                     />
                     <Button size="sm" variant="glow">
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-3 sm:w-4 h-3 sm:h-4" />
                     </Button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button size="sm" variant="hero-outline">All</Button>
-                  <Button size="sm" variant="ghost">High</Button>
-                  <Button size="sm" variant="ghost">Medium</Button>
+                <div className="flex gap-2 overflow-x-auto">
+                  <Button size="sm" variant="hero-outline" className="whitespace-nowrap">All</Button>
+                  <Button size="sm" variant="ghost" className="whitespace-nowrap">High</Button>
+                  <Button size="sm" variant="ghost" className="whitespace-nowrap">Medium</Button>
+                  <Button size="sm" variant="ghost" className="whitespace-nowrap">Low</Button>
                 </div>
               </div>
 
               {/* Task columns layout */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* To Do Column */}
                 <div className="card-glow p-4">
                   <h4 className="font-semibold mb-4 flex items-center gap-2">
