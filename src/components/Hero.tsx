@@ -58,55 +58,83 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Right content - Phone mockups */}
+          {/* Right content - Web Dashboard mockup */}
           <div className="relative">
             {/* 3D Spline container - You can integrate Spline here */}
             <div className="relative h-[600px] flex items-center justify-center">
-              <div className="phone-mockup floating bg-card-gradient border border-primary/20 rounded-[3rem] p-6 w-72 h-[580px] relative z-20">
-                <div className="bg-background rounded-[2.5rem] h-full p-4 overflow-hidden">
-                  <div className="text-center mb-4">
-                    <div className="text-lg font-semibold gradient-text">ZENITH</div>
-                    <div className="text-xs text-muted-foreground">Task Manager</div>
+              {/* Main dashboard container */}
+              <div className="dashboard-mockup bg-card-gradient border border-primary/20 rounded-3xl p-8 w-full max-w-lg relative z-20 floating">
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-hero-gradient rounded-full pulse-glow"></div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full pulse-glow"></div>
+                
+                {/* Dashboard header */}
+                <div className="text-center mb-6">
+                  <div className="text-2xl font-bold gradient-text mb-2">ZENITH</div>
+                  <div className="text-sm text-muted-foreground">Task Manager Dashboard</div>
+                </div>
+
+                {/* Quick stats */}
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  <div className="card-glow p-3 text-center">
+                    <div className="text-lg font-bold gradient-text">12</div>
+                    <div className="text-xs text-muted-foreground">Active</div>
                   </div>
-                  <div className="space-y-3">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="card-glow p-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 bg-primary rounded-full pulse-glow"></div>
-                          <div className="text-sm">Task {i} - Priority High</div>
+                  <div className="card-glow p-3 text-center">
+                    <div className="text-lg font-bold gradient-text">8</div>
+                    <div className="text-xs text-muted-foreground">Completed</div>
+                  </div>
+                  <div className="card-glow p-3 text-center">
+                    <div className="text-lg font-bold gradient-text">4</div>
+                    <div className="text-xs text-muted-foreground">Overdue</div>
+                  </div>
+                </div>
+
+                {/* Task list */}
+                <div className="space-y-3">
+                  <div className="text-sm font-semibold mb-2">Today's Priority Tasks</div>
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="card-glow p-3 group hover:border-primary/40 transition-all duration-300">
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 bg-primary rounded-full pulse-glow"></div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">Task {i} - Priority High</div>
+                          <div className="text-xs text-muted-foreground">Due today</div>
                         </div>
-                        <div className="text-xs text-muted-foreground mt-1">Due today</div>
+                        <div className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
+                          High
+                        </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-6 card-glow p-3">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium">Daily Progress</span>
+                    <span className="text-sm text-primary">75%</span>
+                  </div>
+                  <div className="bg-muted rounded-full h-2">
+                    <div className="bg-hero-gradient h-2 rounded-full w-3/4 pulse-glow"></div>
                   </div>
                 </div>
               </div>
               
-              <div className="phone-mockup floating-delayed bg-card-gradient border border-accent/20 rounded-[3rem] p-6 w-72 h-[580px] absolute -right-8 top-12 z-10 opacity-80">
-                <div className="bg-background rounded-[2.5rem] h-full p-4 overflow-hidden">
-                  <div className="text-center mb-4">
-                    <div className="text-lg font-semibold gradient-text">Analytics</div>
-                    <div className="text-xs text-muted-foreground">Performance</div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="card-glow p-3">
-                      <div className="text-sm font-medium">Daily Progress</div>
-                      <div className="mt-2 bg-muted rounded-full h-2">
-                        <div className="bg-hero-gradient h-2 rounded-full w-3/4"></div>
-                      </div>
-                    </div>
-                    <div className="card-glow p-3">
-                      <div className="text-sm font-medium">Streak</div>
-                      <div className="text-2xl font-bold gradient-text">12 days</div>
-                    </div>
-                  </div>
-                </div>
+              {/* Floating web elements */}
+              <div className="absolute top-20 -left-10 card-glow p-4 floating-delayed bg-card-gradient border border-accent/20 rounded-2xl">
+                <div className="text-sm font-medium text-accent">🔥 Streak</div>
+                <div className="text-2xl font-bold gradient-text">12 days</div>
               </div>
               
-              {/* Floating elements */}
-              <div className="absolute top-20 left-10 w-12 h-12 bg-primary/20 rounded-full blur-sm floating"></div>
-              <div className="absolute bottom-20 right-10 w-8 h-8 bg-accent/20 rounded-full blur-sm floating-delayed"></div>
-              <Zap className="absolute top-1/2 left-0 w-6 h-6 text-secondary floating" />
+              <div className="absolute bottom-20 -right-10 card-glow p-4 floating bg-card-gradient border border-secondary/20 rounded-2xl">
+                <div className="text-sm font-medium text-secondary">⚡ Focus</div>
+                <div className="text-lg font-bold gradient-text">2h 15m</div>
+              </div>
+              
+              {/* Floating particles */}
+              <div className="absolute top-10 left-1/4 w-12 h-12 bg-primary/10 rounded-full blur-sm floating"></div>
+              <div className="absolute bottom-10 right-1/4 w-8 h-8 bg-accent/10 rounded-full blur-sm floating-delayed"></div>
+              <Zap className="absolute top-1/2 right-0 w-6 h-6 text-secondary floating opacity-60" />
             </div>
           </div>
         </div>

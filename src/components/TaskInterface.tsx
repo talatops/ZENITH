@@ -30,69 +30,138 @@ const TaskInterface = () => {
             </div>
           </div>
 
-          {/* Right content - Task interface mockup */}
+          {/* Right content - Full Web Dashboard */}
           <div className="relative">
-            {/* 3D Spline integration point */}
-            <div className="bg-background rounded-3xl p-8 border border-primary/20 relative">
+            {/* 3D Spline integration point for web dashboard */}
+            <div className="bg-background rounded-3xl p-8 border border-primary/20 relative overflow-hidden">
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-hero-gradient rounded-full pulse-glow"></div>
               <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full pulse-glow"></div>
               
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">My Tasks Dashboard</h3>
-                <p className="text-sm text-muted-foreground">Manage your daily productivity</p>
-              </div>
-
-              {/* Task creation form mockup */}
-              <div className="card-glow mb-6">
-                <div className="flex items-center gap-3 p-4">
-                  <div className="w-4 h-4 border-2 border-primary rounded"></div>
-                  <input 
-                    type="text" 
-                    placeholder="Add a new task..."
-                    className="flex-1 bg-transparent border-none outline-none text-sm"
-                    readOnly
-                  />
-                  <Button size="sm" variant="glow">
-                    <Plus className="w-4 h-4" />
-                  </Button>
+              {/* Dashboard header */}
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h3 className="text-2xl font-bold gradient-text mb-2">ZENITH Dashboard</h3>
+                  <p className="text-muted-foreground">Manage your productivity workspace</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-hero-gradient rounded-full flex items-center justify-center pulse-glow">
+                    <span className="text-white text-sm font-bold">JD</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Task list mockup */}
-              <div className="space-y-3">
-                {[
-                  { text: "Design landing page wireframes", completed: true, priority: "high" },
-                  { text: "Review client feedback", completed: false, priority: "medium" },
-                  { text: "Update project documentation", completed: false, priority: "low" },
-                ].map((task, index) => (
-                  <div key={index} className="card-glow">
-                    <div className="flex items-center gap-3 p-3">
-                      <div className={`w-4 h-4 rounded border-2 ${
-                        task.completed 
-                          ? 'bg-primary border-primary' 
-                          : 'border-muted-foreground'
-                      }`}>
-                        {task.completed && (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
+              {/* Quick actions and stats row */}
+              <div className="grid grid-cols-4 gap-4 mb-8">
+                <div className="card-glow p-4 text-center">
+                  <div className="text-2xl font-bold gradient-text">24</div>
+                  <div className="text-xs text-muted-foreground">Total Tasks</div>
+                </div>
+                <div className="card-glow p-4 text-center">
+                  <div className="text-2xl font-bold text-secondary">16</div>
+                  <div className="text-xs text-muted-foreground">Completed</div>
+                </div>
+                <div className="card-glow p-4 text-center">
+                  <div className="text-2xl font-bold text-accent">8</div>
+                  <div className="text-xs text-muted-foreground">In Progress</div>
+                </div>
+                <div className="card-glow p-4 text-center">
+                  <div className="text-2xl font-bold text-destructive">2</div>
+                  <div className="text-xs text-muted-foreground">Overdue</div>
+                </div>
+              </div>
+
+              {/* Task creation and filters */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <div className="card-glow flex-1">
+                  <div className="flex items-center gap-3 p-4">
+                    <div className="w-4 h-4 border-2 border-primary rounded"></div>
+                    <input 
+                      type="text" 
+                      placeholder="Add a new task..."
+                      className="flex-1 bg-transparent border-none outline-none text-sm"
+                      readOnly
+                    />
+                    <Button size="sm" variant="glow">
+                      <Plus className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="hero-outline">All</Button>
+                  <Button size="sm" variant="ghost">High</Button>
+                  <Button size="sm" variant="ghost">Medium</Button>
+                </div>
+              </div>
+
+              {/* Task columns layout */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* To Do Column */}
+                <div className="card-glow p-4">
+                  <h4 className="font-semibold mb-4 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-primary rounded-full pulse-glow"></div>
+                    To Do (4)
+                  </h4>
+                  <div className="space-y-3">
+                    {[
+                      { text: "Design landing page wireframes", priority: "high" },
+                      { text: "Review client feedback", priority: "medium" },
+                    ].map((task, index) => (
+                      <div key={index} className="bg-card-gradient border border-border rounded-xl p-3 hover:border-primary/40 transition-all duration-300 group">
+                        <div className="flex items-start justify-between mb-2">
+                          <span className="text-sm font-medium group-hover:text-primary transition-colors">{task.text}</span>
+                          <div className={`px-2 py-1 rounded-full text-xs ${
+                            task.priority === 'high' ? 'bg-destructive/20 text-destructive' :
+                            'bg-accent/20 text-accent'
+                          }`}>
+                            {task.priority}
                           </div>
-                        )}
+                        </div>
+                        <div className="text-xs text-muted-foreground">Due today</div>
                       </div>
-                      <span className={`flex-1 text-sm ${
-                        task.completed ? 'line-through text-muted-foreground' : ''
-                      }`}>
-                        {task.text}
-                      </span>
-                      <div className={`px-2 py-1 rounded text-xs ${
-                        task.priority === 'high' ? 'bg-destructive/20 text-destructive' :
-                        task.priority === 'medium' ? 'bg-accent/20 text-accent' :
-                        'bg-muted text-muted-foreground'
-                      }`}>
-                        {task.priority}
+                    ))}
+                  </div>
+                </div>
+
+                {/* In Progress Column */}
+                <div className="card-glow p-4">
+                  <h4 className="font-semibold mb-4 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-accent rounded-full pulse-glow"></div>
+                    In Progress (2)
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="bg-card-gradient border border-border rounded-xl p-3 hover:border-accent/40 transition-all duration-300 group">
+                      <div className="flex items-start justify-between mb-2">
+                        <span className="text-sm font-medium group-hover:text-accent transition-colors">Update project documentation</span>
+                        <div className="px-2 py-1 rounded-full text-xs bg-secondary/20 text-secondary">
+                          low
+                        </div>
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2">Due tomorrow</div>
+                      <div className="bg-muted rounded-full h-1">
+                        <div className="bg-accent h-1 rounded-full w-2/3"></div>
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                {/* Done Column */}
+                <div className="card-glow p-4">
+                  <h4 className="font-semibold mb-4 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-secondary rounded-full pulse-glow"></div>
+                    Done (16)
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="bg-card-gradient border border-border rounded-xl p-3 opacity-60">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-4 h-4 bg-secondary rounded border-2 border-secondary flex items-center justify-center">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                        <span className="text-sm font-medium line-through">Setup development environment</span>
+                      </div>
+                      <div className="text-xs text-muted-foreground">Completed yesterday</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
