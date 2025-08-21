@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import TaskCard from "./TaskCard";
 import { mockTasks, mockComments, sections, type Task } from "./mockData";
-import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 const ProjectView = () => {
   const { projectId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
   const [newTask, setNewTask] = useState("");
 
-  // Determine active filter based on current route
   const getActiveFilter = () => {
     if (location.pathname.includes('/my')) return "my";
     if (location.pathname.includes('/shared')) return "shared";
@@ -47,13 +48,30 @@ const ProjectView = () => {
       dependencies: [],
       attachments: [],
       recurring: false,
-    };
+    } as Task;
     setTasks([newTaskObj, ...tasks]);
     setNewTask("");
   };
 
+  const onBottomNav = (tab: string) => {
+    if (tab === "all") navigate(`/home/project/${projectId}`);
+    if (tab === "my") navigate(`/home/project/${projectId}/my`);
+    if (tab === "shared") navigate(`/home/project/${projectId}/shared`);
+  };
+
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom duration-500">
+      {/* Mobile bottom nav */}
+      <div className="md:hidden sticky top-0 z-10 -mt-2">
+        <Tabs value={activeFilter} onValueChange={onBottomNav} className="bg-card-gradient border border-border rounded-xl p-1">
+          <TabsList className="grid grid-cols-3 w-full">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="my">My</TabsTrigger>
+            <TabsTrigger value="shared">Shared</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
       {/* Add Task */}
       <div className="flex gap-2 animate-in slide-in-from-top duration-300" role="form" aria-label="Add new task">
         <Input
@@ -74,8 +92,28 @@ const ProjectView = () => {
         </Button>
       </div>
 
-      {/* Task Board */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in slide-in-from-bottom duration-500 delay-200" aria-label="Task board">
+      {/* Task Board - tabs on mobile, grid on md+ */}
+      <div className="md:hidden">
+        <Tabs defaultValue="todo" className="space-y-4">
+          <TabsList className="grid grid-cols-3">
+            {sections.map(s => (
+              <TabsTrigger key={s.key} value={s.key}>{s.label}</TabsTrigger>
+            ))}
+          </TabsList>
+          {sections.map(section => (
+            <TabsContent key={section.key} value={section.key} className="space-y-4">
+              {filteredTasks.filter(t => t.status === section.key).length === 0 && (
+                <div className="text-muted-foreground text-sm">No tasks here.</div>
+              )}
+              {filteredTasks.filter(t => t.status === section.key).map(task => (
+                <TaskCard key={task.id} task={task} comments={mockComments[task.id] || []} />
+              ))}
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
+
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 animate-in slide-in-from-bottom duration-500 delay-200" aria-label="Task board">
         {sections.map((section, index) => (
           <div 
             key={section.key} 

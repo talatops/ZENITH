@@ -3,13 +3,15 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, User, Settings, LogOut, ArrowLeft, Edit, Zap, Target, Layers } from "lucide-react";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
+import { ChevronDown, User, Settings, LogOut, ArrowLeft, Edit, Zap, Menu } from "lucide-react";
 
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [darkMode, setDarkMode] = useState(true);
   const [accentGlow, setAccentGlow] = useState(true);
+  const [open, setOpen] = useState(false);
 
   // Check if we're in a project view
   const isInProjectView = location.pathname.includes('/home/project/');
@@ -58,13 +60,71 @@ const Home = () => {
 
   const handleBackToProjects = () => {
     navigate('/home');
+    setOpen(false);
   };
+
+  const MobileNav = () => (
+    <div className="p-4">
+      {isInProjectView ? (
+        <div className="space-y-2">
+          <Button variant={isActive(`/home/project/${projectId}`) ? "default" : "ghost"} asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to={`/home/project/${projectId}`}>All Tasks</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to={`/home/project/${projectId}/my`}>My Tasks</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to={`/home/project/${projectId}/shared`}>Shared</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to={`/home/project/${projectId}/settings`}>
+              <Edit className="w-4 h-4 mr-2" />
+              Edit Project Settings
+            </Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          <Button variant={isActive("/home") ? "default" : "ghost"} asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home">All Projects</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/templates">Templates</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/integrations">Integrations</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/archive">Archive</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/favorites">Favorites</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/dashboard">Dashboard</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/calendar">Calendar</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/reports">Reports</Link>
+          </Button>
+          <Button variant="ghost" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/team">Team</Link>
+          </Button>
+          <Button variant={isActive("/home/activity") ? "default" : "ghost"} asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+            <Link to="/home/activity">Activity</Link>
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="flex h-screen">
-        {/* Sidebar */}
-        <div className="w-64 bg-card-gradient border-r border-border flex flex-col transition-all duration-300 ease-in-out">
+        {/* Sidebar (desktop) */}
+        <div className="hidden md:flex w-64 bg-card-gradient border-r border-border flex-col transition-all duration-300 ease-in-out">
           {/* Top Section */}
           <div className="p-6 border-b border-border transition-all duration-300 ease-in-out">
             {isInProjectView ? (
@@ -168,8 +228,36 @@ const Home = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out">
           {/* Header */}
-          <header className="bg-card-gradient border-b border-border p-6 transition-all duration-300 ease-in-out">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <header className="bg-card-gradient border-b border-border p-4 md:p-6 transition-all duration-300 ease-in-out">
+            <div className="flex items-center justify-between gap-2 md:hidden">
+              <Drawer open={open} onOpenChange={setOpen}>
+                <DrawerTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label="Open menu">
+                    <Menu className="w-5 h-5" />
+                  </Button>
+                </DrawerTrigger>
+                <DrawerContent className="bg-card-gradient border-t border-border">
+                  <DrawerHeader className="flex items-center justify-between">
+                    <DrawerTitle className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-hero-gradient rounded-lg flex items-center justify-center">
+                        <Zap className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-bold gradient-text">ZENITH</span>
+                    </DrawerTitle>
+                    <DrawerClose asChild>
+                      <Button variant="ghost" size="sm">Close</Button>
+                    </DrawerClose>
+                  </DrawerHeader>
+                  <MobileNav />
+                </DrawerContent>
+              </Drawer>
+              <div className="text-sm text-muted-foreground">
+                {isInProjectView ? "Project" : "Workspace"}
+              </div>
+              {/* spacer to balance */}
+              <div className="w-10" />
+            </div>
+            <div className="hidden md:flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
               {!isInProjectView && (
                 <div className="animate-in slide-in-from-top duration-300">
                   <h1 className="text-3xl font-bold gradient-text text-glow">
@@ -209,7 +297,7 @@ const Home = () => {
               {/* User chip on top-right */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="flex items-center gap-3 group cursor-pointer hover:bg-card/50 rounded-xl p-2 transition-all duration-200 hover:scale-105" aria-label="Current user">
+                  <div className="hidden md:flex items-center gap-3 group cursor-pointer hover:bg-card/50 rounded-xl p-2 transition-all duration-200 hover:scale-105" aria-label="Current user">
                     <div className="relative">
                       <Avatar className="w-10 h-10 bg-gradient-to-br from-primary to-accent text-white font-bold ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-200 group-hover:scale-110">Y</Avatar>
                       <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-background animate-pulse"></div>
@@ -243,7 +331,7 @@ const Home = () => {
           </header>
 
           {/* Content Area */}
-          <main className="flex-1 overflow-auto p-6 transition-all duration-300 ease-in-out">
+          <main className="flex-1 overflow-auto p-4 md:p-6 transition-all duration-300 ease-in-out">
             <div className="animate-in slide-in-from-bottom duration-300 delay-100">
               <Outlet />
             </div>
